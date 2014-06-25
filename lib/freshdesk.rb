@@ -220,9 +220,9 @@ class Freshdesk
   #   ticket_fields => /ticket_fields.xml
   #   users => /contacts.xml
   #   forums => /categories.xml
-  #   solutions => /solution/categories.xml
+  #   solution_categories => /solution/categories.xml
   #   companies => /customers.xml
-  def mapping(method_name, id = nil)
+  def mapping(method_name, id = nil, id_ = nil)
     case method_name
       when "tickets" then File.join(@base_url + "helpdesk/tickets.xml")
       when "user_ticket" then File.join(@base_url + "helpdesk/tickets/user_ticket.xml")
@@ -230,7 +230,9 @@ class Freshdesk
       when "ticket_notes" then File.join(@base_url, "helpdesk/tickets/#{id}/notes.xml")
       when "users" then File.join(@base_url, "contacts.xml")
       when "forums" then File.join(@base_url + "categories.xml")
-      when "solutions" then File.join(@base_url + "solution/categories.xml")
+      when "solution_categories" then File.join(@base_url + "solution/categories.xml")
+      when "solution_folders" then File.join(@base_url + "solution/categories/#{id}/folders.xml")
+      when "solution_articles" then File.join(@base_url + "solution/categories/#{id}/folders/#{id_}/articles.xml?tags=api")
       when "companies" then File.join(@base_url + "customers.xml")
       when "time_sheets" then File.join(@base_url + "helpdesk/time_sheets.xml")
     end
@@ -244,6 +246,9 @@ class Freshdesk
       when "ticket_notes" then "helpdesk_note"
       when "users" then "user"
       when "companies" then "customer"
+      when "solution_categories" then "solution_category"
+      when "solution_folders" then "solution_folder"
+      when "solution_articles" then "solution_article"
       else raise StandardError, "No root object for this call"
     end
   end
