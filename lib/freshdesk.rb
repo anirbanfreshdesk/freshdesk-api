@@ -203,7 +203,7 @@ class Freshdesk
     end
   end
 
-  [:tickets, :ticket_fields, :ticket_notes, :users, :forums, :solutions, :companies, :time_sheets].each do |a|
+  [:tickets, :ticket_fields, :ticket_notes, :users, :forums, :solutions, :companies, :time_sheets, :solution_categories, :solution_folders, :solution_articles].each do |a|
     fd_define_get a
     fd_define_post a
     fd_define_delete a
