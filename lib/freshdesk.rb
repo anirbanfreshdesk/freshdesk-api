@@ -203,7 +203,7 @@ class Freshdesk
     end
   end
 
-  [:tickets, :ticket_fields, :ticket_notes, :users, :forums, :solutions, :companies, :time_sheets, :solution_categories, :solution_folders, :solution_articles].each do |a|
+  [:tickets, :ticket_fields, :ticket_notes, :users, :forums, :companies, :time_sheets, :solution_categories, :solution_folders, :solution_articles].each do |a|
     fd_define_get a
     fd_define_post a
     fd_define_delete a
@@ -222,7 +222,7 @@ class Freshdesk
   #   forums => /categories.xml
   #   solution_categories => /solution/categories.xml
   #   companies => /customers.xml
-  def mapping(method_name, id = nil, id_ = nil)
+  def mapping(method_name, id = nil)
     case method_name
       when "tickets" then File.join(@base_url + "helpdesk/tickets.xml")
       when "user_ticket" then File.join(@base_url + "helpdesk/tickets/user_ticket.xml")
@@ -232,7 +232,7 @@ class Freshdesk
       when "forums" then File.join(@base_url + "categories.xml")
       when "solution_categories" then File.join(@base_url + "solution/categories.xml")
       when "solution_folders" then File.join(@base_url + "solution/categories/#{id}/folders.xml")
-      when "solution_articles" then File.join(@base_url + "solution/categories/#{id}/folders/#{id_}/articles.xml?tags=api")
+      when "solution_articles" then File.join(@base_url + "solution/categories/#{id.first}/folders/#{id.last}/articles.xml?tags=api")
       when "companies" then File.join(@base_url + "customers.xml")
       when "time_sheets" then File.join(@base_url + "helpdesk/time_sheets.xml")
     end
