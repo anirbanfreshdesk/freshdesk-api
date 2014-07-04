@@ -203,7 +203,7 @@ class Freshdesk
     end
   end
 
-  [:tickets, :ticket_fields, :ticket_notes, :users, :forums, :companies, :time_sheets, :solution_categories, :solution_folders, :solution_articles].each do |a|
+  [:tickets, :ticket_fields, :ticket_notes, :users, :forums, :companies, :time_sheets, :groups, :solution_categories, :solution_folders, :solution_articles].each do |a|
     fd_define_get a
     fd_define_post a
     fd_define_delete a
@@ -229,6 +229,7 @@ class Freshdesk
       when "ticket_fields" then File.join(@base_url, "ticket_fields.xml")
       when "ticket_notes" then File.join(@base_url, "helpdesk/tickets/#{id}/notes.xml")
       when "users" then File.join(@base_url, "contacts.xml")
+      when "groups" then File.join(@base_url, "groups.xml")
       when "forums" then File.join(@base_url + "categories.xml")
       when "solution_categories" then File.join(@base_url + "solution/categories.xml")
       when "solution_folders" then File.join(@base_url + "solution/categories/#{id}/folders.xml")
@@ -245,6 +246,7 @@ class Freshdesk
       when "ticket_fields" then "helpdesk-ticket-fields"
       when "ticket_notes" then "helpdesk_note"
       when "users" then "user"
+      when "groups" then "group"
       when "companies" then "customer"
       when "solution_categories" then "solution_category"
       when "solution_folders" then "solution_folder"
